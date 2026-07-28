@@ -55,6 +55,7 @@
     <section class="block">
       <h2 class="block__title">News</h2>
       <ul class="news">
+        <li><span class="news__date">Jul 2026</span><span class="news__item">Started <strong>Pixel Agent</strong>, an independent study on failure-mode analysis of computer-use agents.</span></li>
         <li><span class="news__date">2026</span><span class="news__item"><strong>VLAFactory</strong> submitted to the <em>EMNLP 2026</em> Demo track.</span></li>
         <li><span class="news__date">Aug 2025</span><span class="news__item">Began my M.S. in Machine Learning &amp; Data Science at <strong>Carnegie Mellon University</strong>.</span></li>
         <li><span class="news__date">Jun 2025</span><span class="news__item">Wrapped up four years as an ML Scientist at <strong>Fast Retailing (UNIQLO)</strong>, Tokyo.</span></li>
@@ -80,6 +81,27 @@
           (success 60.9% → 68.1%), with intermediate VLM gains transferring inconsistently downstream.
         </p>
         <p class="entry__actions"><a href="https://github.com/cxcscmu/VLAFactory" target="_blank" rel="noopener">code</a></p>
+      </article>
+
+      <article class="entry">
+        <div class="entry__head">
+          <h3 class="entry__title">Pixel Agent: Failure-Mode Analysis of Computer-Use Agents</h3>
+          <span class="entry__venue">Ongoing · Independent study, CMU</span>
+        </div>
+        <p class="entry__authors">Computer-Use Agents · OSWorld · GUI Grounding · VLM-as-Judge</p>
+        <p class="entry__desc">
+          Studying why computer-use agents (CUAs) fail on real desktop tasks. Building a failure-mode
+          taxonomy — separating perception/grounding errors from cognitive/planning errors — and a
+          <strong>VLM-as-judge</strong> pipeline that classifies errors in OpenCUA agent trajectories on the
+          <strong>OSWorld</strong> benchmark by comparing them against human (OSWorld-Human) trajectories,
+          validated through manual annotation and inter-annotator agreement studies.
+        </p>
+        <p class="entry__desc">
+          On the GUI-grounding side, reproduced and improved OpenCUA results — lifting
+          <strong>ScreenSpot-V2 87.0 → 91.5</strong> and <strong>OSWorld-G 46.5 → 48.8</strong> at 32B — and
+          built trajectory-visualization and annotation tooling to support the error analysis.
+        </p>
+        <p class="entry__actions"><a href="https://github.com/MaximusAnax/pixel_agent" target="_blank" rel="noopener">code</a></p>
       </article>
     </section>
 

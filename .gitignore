@@ -1,1 +1,5 @@
 .DS_Store
+
+# Internal research notes — never publish to the public site
+Pixel Agent Meeting Notes.md
+*.notes.md
