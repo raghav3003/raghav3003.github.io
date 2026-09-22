@@ -71,9 +71,9 @@
           <span class="entry__venue">Tokyo · Aug 2021 – Jun 2025</span>
         </div>
         <ul class="entry__points">
-          <li>Architected and productionized large-scale demand forecasting systems using <strong>Python, PyTorch, LightGBM, Vertex AI &amp; BigQuery</strong>, improving <strong>WAPE by 3 points</strong> through hierarchical forecasting, temporal feature engineering, and automated ML pipelines.</li>
-          <li>Built <strong>cold-start/new-item forecasting and multimodal product embeddings</strong> using <strong>Transformers/CLIP, PyTorch &amp; vector retrieval</strong>, integrating predictions into automated SKU ordering and contributing to <strong>¥6B+ reduction in excess inventory</strong>.</li>
-          <li>Developed <strong>LLM/agentic analytics and text-to-SQL systems</strong> using <strong>LangChain/LangGraph, RAG, tool calling &amp; BigQuery</strong>, alongside production <strong>Docker/FastAPI/MLflow</strong> workflows, eliminating <strong>100+ hours of manual analysis</strong>.</li>
+          <li>Rebuilt SKU-level demand forecasting as a production system, replacing planner heuristics with models that learn from seasonality, holidays, and how similar products have sold. Improved forecast accuracy by <strong>3 WAPE points</strong>.</li>
+          <li>Extended forecasting to newly launched items, which have no sales history at all, by learning what a product looks like and how it is described and borrowing demand patterns from similar ones. Feeding automated ordering, this contributed to a <strong>¥6B+ reduction in excess inventory</strong>.</li>
+          <li>Built LLM-driven analytics and text-to-SQL tooling so merchandising teams could ask questions of sales and inventory data directly instead of waiting on an analyst, eliminating <strong>100+ hours</strong> of manual work.</li>
         </ul>
       </article>
     </section>
@@ -148,34 +148,36 @@
       <article class="entry">
         <div class="entry__head">
           <h3 class="entry__title">Agent Harness for Coding and Game-Playing LLM Agents</h3>
-          <span class="entry__venue">Python · Modal · SWE-ReX · OpenAI API</span>
         </div>
         <p class="entry__desc">
-          A domain-agnostic <strong>ReAct</strong> agent harness with tool calling, step budgets, and sandboxed
-          bash/Python execution on <strong>Modal</strong>, driving both a <strong>SWE-bench</strong>-style
-          code-repair agent and a game-playing agent, plus <strong>progressive-disclosure skill loading</strong>
-          that exposes only skill metadata until the agent invokes one.
+          A harness for running AI agents, built from scratch: a loop that lets a language model reason, call
+          tools, run code in a sandbox, and keep working through a task over many steps. The same loop drives
+          two very different agents, one that fixes bugs in real code repositories and one that plays chess.
         </p>
         <p class="entry__desc">
-          Implemented <strong>LLM context compaction</strong> and A/B tested it against full context: peak prompt
-          size dropped <strong>45%</strong>, but the summarizer's own token cost and the detail it discarded left
-          only <strong>8%</strong> net savings. Ran agent-failure studies across two LLM backbones, measuring
-          illegal-action rates, tool-error recovery, and output-budget exhaustion (<strong>11-20%</strong> of steps
-          produced no action at all); model choice dominated observation design.
+          I used it to answer a practical question: when an agent's history grows too long to fit, does
+          summarizing the older parts actually save anything? It halved the largest prompt, but writing those
+          summaries costs tokens too, and the details they dropped forced the agent to redo work, leaving a net
+          saving of only <strong>8%</strong>. A second experiment across two models found that which model you
+          use matters far more than how much information you show the agent.
         </p>
       </article>
 
       <article class="entry">
         <div class="entry__head">
           <h3 class="entry__title">GoT-Diffuse: Compositional Text-to-Image Generation</h3>
-          <span class="entry__venue">SDXL · Diffusion · PyTorch</span>
         </div>
         <p class="entry__desc">
-          Identified a <strong>planner–decoder execution gap</strong> in reasoning-based text-to-image on
-          T2I-CompBench++ (plans spatially valid 83.1% of the time, but only 64.7% of images satisfy the
-          relations) via a custom BLIP-VQA/UniDet diagnostic. Layout-guided SDXL conditioning lifts spatial
-          relation preservation <strong>+19%</strong> and color binding <strong>+15%</strong>, motivating a
-          timestep-routed diffusion decoder that preserves object-specific conditioning during early denoising.
+          Image generators that plan a layout before they draw still put objects in the wrong places. I built a
+          diagnostic to find where that breaks down, and the answer was clear: the plans themselves were correct
+          <strong>83%</strong> of the time, but only <strong>65%</strong> of finished images actually followed
+          them. The failure is in the drawing, not the thinking.
+        </p>
+        <p class="entry__desc">
+          Guiding the generator with an explicit layout recovered much of that gap, improving spatial
+          relationships <strong>19%</strong> and color assignment <strong>15%</strong>, and pointing toward a
+          decoder that holds on to each object's description through the early, most formative steps of
+          generation.
         </p>
         <p class="entry__actions"><a href="got-diffuse.pdf" target="_blank" rel="noopener">pdf</a></p>
       </article>
@@ -183,38 +185,33 @@
       <article class="entry">
         <div class="entry__head">
           <h3 class="entry__title">TS-QFormer: Time-Series-to-LLM Adapter for QA</h3>
-          <span class="entry__venue">PyTorch · Frozen Encoders/LLMs</span>
         </div>
         <p class="entry__desc">
-          A parameter-efficient adapter connecting a frozen <strong>MOMENT-large</strong> time-series encoder to a
-          frozen <strong>OPT-2.7B</strong> language model via channel-aware projections and question-conditioned query
-          tokens, with a supervised chain-of-thought pipeline for temporal reasoning that improves ROUGE-F1 over a
-          direct-answer baseline.
+          Sensor readings and language models do not naturally speak to each other. This project builds a small
+          translator between them, so you can ask questions in plain language about numerical time-series data
+          without retraining either the language model or the encoder that reads the signal.
+        </p>
+        <p class="entry__desc">
+          The adapter learns which stretch of a long signal a given question is actually about, and was trained
+          to reason step by step through time rather than jumping straight to an answer, which measurably
+          improved answer quality over a direct-answer baseline.
         </p>
         <p class="entry__actions"><a href="ts-qformer.pdf" target="_blank" rel="noopener">pdf</a></p>
       </article>
 
       <article class="entry">
         <div class="entry__head">
-          <h3 class="entry__title">Deep Learning Stack from Scratch</h3>
-          <span class="entry__venue">Python · C++ · CUDA</span>
+          <h3 class="entry__title">Deep Learning Framework and Generative Models from Scratch</h3>
         </div>
         <p class="entry__desc">
-          Reverse-mode <strong>autograd</strong>, stable softmax loss, SGD/Adam, and core NN modules on top of a
-          NumPy-like NDArray backend with stride-aware ops and tiled GPU matmul kernels, plus a
-          <strong>FlashAttention-style</strong> optimization cutting memory 20%+ vs. vanilla attention.
+          A deep learning library built from the ground up with no framework underneath it: automatic
+          differentiation, optimizers, and a tensor engine with hand-written GPU kernels, including a memory
+          optimization that cut attention memory by more than <strong>20%</strong>.
         </p>
-      </article>
-
-      <article class="entry">
-        <div class="entry__head">
-          <h3 class="entry__title">Generative Modeling &amp; Efficient Transformers</h3>
-          <span class="entry__venue">PyTorch</span>
-        </div>
         <p class="entry__desc">
-          Implemented <strong>DDPM</strong> with a U-Net backbone, ELBO objective, and cosine schedule (AFHQ-Cat),
-          and extended minGPT with <strong>RoPE</strong> and <strong>Grouped-Query Attention</strong>, improving
-          validation loss 10%+ while benchmarking throughput/memory tradeoffs.
+          On that foundation I built an image-generating diffusion model and a GPT-style language model with two
+          modern attention improvements, which trained to <strong>10%</strong> lower validation loss than the
+          baseline.
         </p>
       </article>
     </section>
