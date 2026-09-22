@@ -158,7 +158,7 @@
           I used it to answer a practical question: when an agent's history grows too long to fit, does
           summarizing the older parts actually save anything? It halved the largest prompt, but writing those
           summaries costs tokens too, and the details they dropped forced the agent to redo work, leaving a net
-          saving of only <strong>8%</strong>. A second experiment across two models found that which model you
+          saving of only 8%. A second experiment across two models found that which model you
           use matters far more than how much information you show the agent.
         </p>
       </article>
@@ -170,12 +170,12 @@
         <p class="entry__desc">
           Image generators that plan a layout before they draw still put objects in the wrong places. I built a
           diagnostic to find where that breaks down, and the answer was clear: the plans themselves were correct
-          <strong>83%</strong> of the time, but only <strong>65%</strong> of finished images actually followed
+          83% of the time, but only 65% of finished images actually followed
           them. The failure is in the drawing, not the thinking.
         </p>
         <p class="entry__desc">
           Guiding the generator with an explicit layout recovered much of that gap, improving spatial
-          relationships <strong>19%</strong> and color assignment <strong>15%</strong>, and pointing toward a
+          relationships 19% and color assignment 15%, and pointing toward a
           decoder that holds on to each object's description through the early, most formative steps of
           generation.
         </p>
@@ -210,7 +210,7 @@
         </p>
         <p class="entry__desc">
           Alongside the core building blocks and training algorithms, I wrote GPU code by hand, including a memory
-          optimization that cut the memory attention needs by more than <strong>20%</strong>.
+          optimization that cut the memory attention needs by more than 20%.
         </p>
       </article>
 
@@ -239,7 +239,7 @@
           both to a GPT-style model.
         </p>
         <p class="entry__desc">
-          Benchmarked against the unmodified baseline, the combination trained to <strong>10%</strong> lower
+          Benchmarked against the unmodified baseline, the combination trained to 10% lower
           validation loss, and I measured what each one costs in speed and memory.
         </p>
       </article>
