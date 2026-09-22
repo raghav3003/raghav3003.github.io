@@ -201,17 +201,46 @@
 
       <article class="entry">
         <div class="entry__head">
-          <h3 class="entry__title">Deep Learning Framework and Generative Models from Scratch</h3>
+          <h3 class="entry__title">A PyTorch-like Deep Learning Framework</h3>
         </div>
         <p class="entry__desc">
-          A deep learning library built from the ground up with no framework underneath it: automatic
-          differentiation, optimizers, and a tensor engine with hand-written GPU kernels, including a memory
-          optimization that cut attention memory by more than <strong>20%</strong>.
+          A deep learning library built from the ground up, with no framework underneath it. It tracks the
+          calculations a model performs and works backwards through them to figure out how to improve the model,
+          which is the machinery every modern deep learning library is built on.
         </p>
         <p class="entry__desc">
-          On that foundation I built an image-generating diffusion model and a GPT-style language model with two
-          modern attention improvements, which trained to <strong>10%</strong> lower validation loss than the
-          baseline.
+          Alongside the core building blocks and training algorithms, I wrote GPU code by hand, including a memory
+          optimization that cut the memory attention needs by more than <strong>20%</strong>.
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry__head">
+          <h3 class="entry__title">Diffusion Models (DDPM)</h3>
+        </div>
+        <p class="entry__desc">
+          An image generator built end to end on the idea behind most modern ones: take a real photograph, add
+          noise to it step by step until nothing is left, then train a model to reverse that process. Generating a
+          new image means starting from pure noise and running the model backwards until a picture appears.
+        </p>
+        <p class="entry__desc">
+          I implemented both directions, the noising and the denoising, along with the schedule that controls how
+          fast noise is added, and trained it on a dataset of cat photographs.
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry__head">
+          <h3 class="entry__title">RoPE and GQA for Transformers</h3>
+        </div>
+        <p class="entry__desc">
+          Two modern improvements to the attention mechanism behind language models: a better way of encoding
+          where each word sits in a sentence, and a cheaper way of sharing work across attention heads. I added
+          both to a GPT-style model.
+        </p>
+        <p class="entry__desc">
+          Benchmarked against the unmodified baseline, the combination trained to <strong>10%</strong> lower
+          validation loss, and I measured what each one costs in speed and memory.
         </p>
       </article>
     </section>
