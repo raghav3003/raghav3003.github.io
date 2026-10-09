@@ -147,6 +147,43 @@
 
       <article class="entry">
         <div class="entry__head">
+          <h3 class="entry__title">Asynchronous Multi-Turn RL for LLM Agents</h3>
+        </div>
+        <p class="entry__desc">
+          A reinforcement learning framework that teaches language-model agents to use tools over many turns,
+          where the only feedback is whether the agent succeeded at the very end. It supports REINFORCE, GRPO,
+          and PPO-style updates, and keeps the learning logic separate from the GPUs that run it.
+        </p>
+        <p class="entry__desc">
+          The core piece is an <strong>asynchronous GRPO trainer</strong>: 256 episodes generate experience in
+          parallel while the model keeps learning, instead of each waiting on the other. Some of that experience
+          comes from a slightly older version of the model, so the trainer drops anything too stale and corrects
+          the rest with importance weighting to keep training stable. I used it to train
+          <strong>Qwen3.5-4B with LoRA</strong> on self-hosted H100s, with Megatron-LM for training and vLLM for
+          sampling.
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry__head">
+          <h3 class="entry__title">Twitter Analytics Microservice on AWS</h3>
+        </div>
+        <p class="entry__desc">
+          A web service that ranks a Twitter user's closest contacts by how often they interact, which hashtags
+          they share, and how well their conversations match a search, built over 1 TB of raw tweets. A PySpark
+          pipeline on GCP Dataproc cleans and scores the data into 40.8M MySQL rows, and a Go and gRPC service
+          answers requests on Kubernetes, deployed end to end with Terraform, Helm, and GitHub Actions.
+        </p>
+        <p class="entry__desc">
+          The biggest win was in the database: storing each answer pre-joined instead of assembling it from three
+          tables made the service <strong>6.8× faster</strong>. I then moved it to AWS managed services and
+          benchmarked three setups (EKS with RDS MySQL, Fargate, and DynamoDB). The winner handled
+          <strong>7,411 requests per second</strong> for $0.45 an hour.
+        </p>
+      </article>
+
+      <article class="entry">
+        <div class="entry__head">
           <h3 class="entry__title">Agent Harness for Coding and Game-Playing LLM Agents</h3>
         </div>
         <p class="entry__desc">
@@ -249,9 +286,9 @@
     <section class="block">
       <h2 class="block__title">Technical Skills</h2>
       <dl class="skills">
-        <div><dt>Languages</dt><dd>Python, SQL, C++, CUDA</dd></div>
-        <div><dt>Frameworks &amp; Tools</dt><dd>PyTorch, Scikit-learn, LightGBM, LangChain/LangGraph, NumPy, Pandas, BigQuery, Vertex AI, GCP, Modal, Docker, FastAPI, MLflow, Git, Weights &amp; Biases</dd></div>
-        <div><dt>Core Areas</dt><dd>Deep Learning, Generative AI, Multimodal Learning, LLM Agents, RAG, Time-Series Forecasting, Parameter-Efficient Fine-Tuning</dd></div>
+        <div><dt>Languages</dt><dd>Python, Go, SQL, C++, CUDA</dd></div>
+        <div><dt>Frameworks &amp; Tools</dt><dd>PyTorch, Scikit-learn, LightGBM, LangChain/LangGraph, NumPy, Pandas, BigQuery, Vertex AI, GCP, Modal, Docker, Kubernetes, Helm, Terraform, FastAPI, MLflow, Git, Weights &amp; Biases</dd></div>
+        <div><dt>Core Areas</dt><dd>Deep Learning, Generative AI, Multimodal Learning, Reinforcement Learning, LLM Agents, RAG, Time-Series Forecasting, Parameter-Efficient Fine-Tuning</dd></div>
       </dl>
     </section>
 
